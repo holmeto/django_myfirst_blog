@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<style type="text/css">
+           body{
+        color: #C71585;
+        background: 	#87CEFA;
+        padding: 12px 5em;
+        margin:7px;
+    }
+	h1{
+        margin-top: 50px;
+        padding: 1em ;
+    }
+	</style>
+</head>
+<body>
+	<center><h1>注册页面：</h1></center>
+<form method = 'post' action="">
+    {% csrf_token %}
+    <center>{{uf.as_p}}
+    <input type="submit" value = "提交" /></center>
+</form>
+<br>
+<center>
+<a href="http://127.0.0.1:8000/login/">登陆</a></center>
+
+</body>
+</html>

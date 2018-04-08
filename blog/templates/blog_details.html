@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blog.title }}</title>
+<style type="text/css">
+    .blog{
+        padding: 20px 0px;
+    }
+    .blog .info span{
+        padding-right: 10px;
+
+    }
+    .blog .summary{
+        padding-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <center><span><a href="/blog/">博客首页</a> </span></center>
+</div>
+<div class="log-out" style="padding-top: 20px ;">
+          <center><span><a href="/login/">退出登录...</a> </span></center>
+</div>
+<div class="content">
+    <div class="blog">
+        <div class="title">
+		<center>
+            <h2>{{ blog.title }}</h2>
+			</center>
+        </div>
+        <div class="info">
+		<center>
+            <span class="category" style="color:#ff9900 ;">|{{ blog.category.name }}></span>
+            <span class="author" style="color: #4a86e8">{{ blog.user.username }}></span>
+            <span class="pub" style="color: #6aa84f">{{ blog.pub_time }}|</span>
+			</center>
+        </div>
+        <div class="summary">
+            {{ blog.content }}
+        </div>
+        <div class="comment">
+            <div class="comment-diaplay" style="padding-top: 20px;">
+			<center>
+                <h3>评论</h3>
+                {% for comment in comments %}
+                 <div class="comment-field" style="padding-top: 10px;">
+                     {{ comment.name }}说:{{ comment.content }}.   ------   发表于<small><em>{{comment.pub}}</em></small>.
+                 </div>
+                {% endfor %}
+            </div>
+			</center>
+			<center>
+        <div class="comment-post" style="padding-top: 20px ;">
+          <span><a href="{% url 'comment_get_detail' blog.id %}">我要评论...</a> </span>
+        </div>
+		 </center>
+        </div>
+    </div>
+</div>
+</body>
+</html>

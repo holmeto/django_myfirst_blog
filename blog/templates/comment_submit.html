@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blog.title }}</title>
+<style type="text/css">
+    .blog{
+        padding: 20px 0px;
+    }
+    .blog .info span{
+        padding-right: 10px;
+
+    }
+    .blog .summary{
+        padding-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <center><span><a href="/blog/">博客首页</a> </span></center>
+</div>
+
+<div class="content">
+    <div class="blog">
+        <div class="title">
+           <center><h2>{{ blog.title }}</h2></center>
+        </div>
+		<center>
+        <div class="info">
+            <span class="category" style="color:#ff9900 ;">|{{ blog.category.name }}></span>
+            <span class="author" style="color: #4a86e8">{{ blog.user.username }}></span>
+            <span class="pub" style="color: #6aa84f">{{ blog.pub_time }}|</span>
+        </div>
+		</center>
+        <div class="summary">
+            <center>{{ blog.content }}</center>
+        </div>
+        <div class="comment">
+		<center>
+            <div class="comment-diaplay" style="padding-top: 20px;">
+                <h3>评论</h3>
+                {% for comment in comments %}
+                 <div class="comment-field" style="padding-top: 10px;">
+                     {{ comment.name }}说:{{ comment.content }} ------   发表于<small><em>{{comment.pub}}</em></small>.
+                 </div>
+                {% endfor %}
+            </div>
+		</center>
+		<center>
+        <div class="comment-post" style="padding-top: 20px ;">
+            <h3>提交评论！</h3>
+			{% if form.errors %}
+               <p style="color: red;">
+                     Please correct the error{{ form.errors|pluralize }} below.
+               </p>
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="input-field" style="padding-top: 10px;">
+                        <p>{{ field.label }}:{{ field }}<span>{{ field.errors}}</span></p>
+                    </div>
+                    {% comment %}<div class="error" style="color: red;">
+                        {{ field.errors }}
+                    </div>{% endcomment %}
+                {% endfor %}
+                {% comment %}<button type="submit" style="margin-top:10px ">提交</button>{% endcomment %}
+				<input type="submit" value="提交" style="margin-top:10px" >
+                <input type="button" value="返回" onclick="javascript:if(confirm('确定要放弃评论吗？')){alert('即将返回！');window.location.href='http://127.0.0.1:8000/detail/{{blog.id}}';return true;}return false;">
+            </form>
+        </div>
+		</center>
+        </div>
+    </div>
+</div>
+</body>
+</html>

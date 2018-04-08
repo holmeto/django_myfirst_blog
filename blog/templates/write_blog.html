@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请开始你的表演</title>
+<style type="text/css">
+
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <span><a href="/blog/"><center>博客首页</center></a></span>
+</div>      
+<div class="write-post" style="padding-top:20px;">
+            <form action="" method="post">
+                {% csrf_token %}
+				<div class="input-field" style="padding-top:10px;color:brown;">
+                        <p><center>{{ data.title.label }}:{{ data.title }}<span>{{ data.title.errors}}</span></center></p>
+                </div>
+				<div class="input-field" style='color:brown;'>
+                        <center>{{ data.content.label }}:</center>
+                </div>
+				<div style='color:brown;'>
+                        <p><center><textarea rows="30" cols="100" {{ data.content }}></textarea><span>{{ data.content.errors }}</span></center></p>
+                </div>
+				<div class="input-field" style="padding-top:10px;color:brown;">
+                        <p><center>
+						{{ data.category.label }}:{{ data.category }}<br>
+						请输入对应编号:<br>
+						<span>0:故事 1:纪实 2:新闻 3:教程 4:感想 5:音乐 </span>
+						<span>{{ data.category.errors}}</span></center></p>
+                </div>
+				
+				<center><input type="submit" value="提交" style="margin-top:10px;" >   
+				<input type="button" value="返回" onclick="javascript:if(confirm('确定要放弃提交吗？')){alert('即将返回！');window.location.href='http://127.0.0.1:8000/blog/';return true;}return false;">
+				{%comment%}<a type="button" href="/blog/" onclick="javascript:if(confirm('确定要放弃提交吗？')){alert('即将返回！');;return true;}return false;">返回</a>
+				<input type="button" name="Submit" value="返回" onclick ="location.href='http://127.0.0.1:8000/blog/'"/></center>
+				<input type="button" value="返回" ></center>{%endcomment%}
+            </form>
+</div>
+</body>
+</html>
+                    {%comment%}
+					{% for element in data %}
+				<span class='blog' style='color:brown;'>{{ element.label }}:{{ element }}</span><span>{{ element.errors }}</span>
+				{% endfor %}
+					{%endcomment%}
